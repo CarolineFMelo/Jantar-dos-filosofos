@@ -1,4 +1,4 @@
-package functions;
+package dijkstraFunctions;
 
 import java.util.ArrayList;
 import java.util.List;

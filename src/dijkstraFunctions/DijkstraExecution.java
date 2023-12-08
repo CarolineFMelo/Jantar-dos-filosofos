@@ -1,6 +1,6 @@
-package functions;
+package dijkstraFunctions;
 
-public class ProgramExecution {
+public class DijkstraExecution {
 	
 	public static void main(String args[]) {
 		int numPhilosophers = 5;
