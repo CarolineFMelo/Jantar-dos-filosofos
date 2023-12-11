@@ -28,7 +28,7 @@ public class Philosopher extends Thread {
 	public void run() {
 		while(true) {
 			//limits execution time in milliseconds for tests
-			if(System.currentTimeMillis() - start > 1000) {
+			if(System.currentTimeMillis() - start > 3000) {
                 break;
             }
 			
