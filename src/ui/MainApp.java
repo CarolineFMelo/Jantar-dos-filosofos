@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -15,7 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
-import functions.Philosopher;
+import carolineFunctions.CarolineExecution;
+import dijkstraFunctions.DijkstraExecution;
+import dijkstraFunctions.Philosopher;
 
 public class MainApp extends JFrame {
 
@@ -23,6 +26,8 @@ public class MainApp extends JFrame {
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ArrayList<JLabel> labelPhilosopher = new ArrayList<JLabel>();
+	enum Status { STOPPED, STARTED };
+	private static Status status = Status.STOPPED;
 
 	/**
 	 * Launch the application.
@@ -73,7 +78,15 @@ public class MainApp extends JFrame {
 		JButton btnIniciar = new JButton("Iniciar");
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if (status == Status.STOPPED) {
+					if (rdbtnDijkstra.isSelected()) {
+						DijkstraExecution.dijkstraStart();
+					}
+					if (rdbtnCaroline.isSelected()) {
+						CarolineExecution.carolineStart();
+					}
+					status = Status.STARTED;
+				}
 			}
 		});
 		btnIniciar.setBounds(445, 195, 89, 23);
@@ -82,41 +95,49 @@ public class MainApp extends JFrame {
 		JButton btnParar = new JButton("Parar");
 		btnParar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if (status == Status.STARTED) {
+					if (rdbtnDijkstra.isSelected()) {
+						DijkstraExecution.dijkstraStop();
+					}
+					if (rdbtnCaroline.isSelected()) {
+						CarolineExecution.carolineStop();
+					}
+					status = Status.STOPPED;
+				}
 			}
 		});
 		btnParar.setBounds(445, 229, 89, 23);
 		contentPane.add(btnParar);
 		
+		JLabel lblPhilosopher0 = new JLabel("");
+		labelPhilosopher.add(lblPhilosopher0);
+		lblPhilosopher0.setBounds(202, 32, 40, 40);
+		lblPhilosopher0.setIcon(new ImageIcon(MainApp.class.getResource("/pacman.png")));
+		contentPane.add(lblPhilosopher0);
+		
 		JLabel lblPhilosopher1 = new JLabel("");
 		labelPhilosopher.add(lblPhilosopher1);
-		lblPhilosopher1.setBounds(202, 32, 40, 40);
-		lblPhilosopher1.setIcon(new ImageIcon(MainApp.class.getResource("/pacman.png")));
+		lblPhilosopher1.setBounds(292, 102, 40, 40);
+		lblPhilosopher1.setIcon(new ImageIcon(MainApp.class.getResource("/red-ghost.png")));
 		contentPane.add(lblPhilosopher1);
 		
 		JLabel lblPhilosopher2 = new JLabel("");
 		labelPhilosopher.add(lblPhilosopher2);
-		lblPhilosopher2.setBounds(292, 102, 40, 40);
-		lblPhilosopher2.setIcon(new ImageIcon(MainApp.class.getResource("/red-ghost.png")));
+		lblPhilosopher2.setBounds(256, 195, 40, 40);
+		lblPhilosopher2.setIcon(new ImageIcon(MainApp.class.getResource("/cyan-ghost.png")));
 		contentPane.add(lblPhilosopher2);
 		
 		JLabel lblPhilosopher3 = new JLabel("");
 		labelPhilosopher.add(lblPhilosopher3);
-		lblPhilosopher3.setBounds(256, 195, 40, 40);
-		lblPhilosopher3.setIcon(new ImageIcon(MainApp.class.getResource("/cyan-ghost.png")));
+		lblPhilosopher3.setBounds(151, 195, 40, 40);
+		lblPhilosopher3.setIcon(new ImageIcon(MainApp.class.getResource("/orange-ghost.png")));
 		contentPane.add(lblPhilosopher3);
 		
 		JLabel lblPhilosopher4 = new JLabel("");
 		labelPhilosopher.add(lblPhilosopher4);
-		lblPhilosopher4.setBounds(151, 195, 40, 40);
-		lblPhilosopher4.setIcon(new ImageIcon(MainApp.class.getResource("/orange-ghost.png")));
+		lblPhilosopher4.setBounds(111, 102, 40, 40);
+		lblPhilosopher4.setIcon(new ImageIcon(MainApp.class.getResource("/pink-ghost.png")));
 		contentPane.add(lblPhilosopher4);
-		
-		JLabel lblPhilosopher5 = new JLabel("");
-		labelPhilosopher.add(lblPhilosopher5);
-		lblPhilosopher5.setBounds(111, 102, 40, 40);
-		lblPhilosopher5.setIcon(new ImageIcon(MainApp.class.getResource("/pink-ghost.png")));
-		contentPane.add(lblPhilosopher5);
 		
 		JLabel background = new JLabel("");
 		background.setBounds(10, 11, 425, 241);
@@ -125,20 +146,6 @@ public class MainApp extends JFrame {
 	}
 	
 	public void PhilosopherThink(int index) {
-//		switch (index) {
-//		case 0:
-//			labelPhilosopher.get(0).setIcon(new ImageIcon(MainApp.class.getResource("/red-ghost.png")));
-//			break;
-//		case 1:
-//			labelPhilosopher.get(1).setIcon(new ImageIcon(MainApp.class.getResource("/cyan-ghost.png")));
-//			break;
-//		case 2:
-//			labelPhilosopher.get(2).setIcon(new ImageIcon(MainApp.class.getResource("/orange-ghost.png")));
-//			break;
-//		case 3:
-//			labelPhilosopher.get(3).setIcon(new ImageIcon(MainApp.class.getResource("/pink-ghost.png")));
-//			break;
-//		}
 		labelPhilosopher.get(index).setIcon(new ImageIcon(MainApp.class.getResource("/ghost.png")));
 	}
 	
