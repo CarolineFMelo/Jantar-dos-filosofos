@@ -5,10 +5,8 @@ import java.util.List;
 
 public class Philosopher extends Thread {
 	
-	private int idThread;
-	private Semaphore leftFork;
-	private Semaphore rightFork;
-	private int contEat = 0;
+	private int idThread, contEat = 0;;
+	private Semaphore leftFork, rightFork;
 	private long timeWithoutEating = 0;
 	private long thinkingEatingTime = 0;
 	private long start = System.currentTimeMillis();

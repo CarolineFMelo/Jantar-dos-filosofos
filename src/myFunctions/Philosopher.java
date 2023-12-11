@@ -1,13 +1,11 @@
 package myFunctions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Philosopher extends Thread {
 
-	private int idThread;
-	private int leftFork;
-	private int rightFork;
-	private int contEat = 0;
+	private int idThread, leftFork, rightFork, contEat = 0;
 	private long start = System.currentTimeMillis();
 	private long timeWithoutEating = 0;
 	private long timeAux = System.currentTimeMillis();
@@ -19,6 +17,11 @@ public class Philosopher extends Thread {
         this.idThread = id;
         this.leftFork = id;
         this.rightFork = (id + 1) % num;
+        this.timeData = new ArrayList<>(num);
+		
+        for(int i = 0; i < num; i++) {
+        	timeData.add(new ArrayList<>());
+        }
     }
 
 	@Override
@@ -67,7 +70,7 @@ public class Philosopher extends Thread {
 		try {
 			//waiting time between thinking and eating
         	subAux = System.currentTimeMillis() - thinkingEatingTime;
-        	timeData.get(idThread - 1).add(subAux);
+        	timeData.get(idThread).add(subAux);
 			
 			//generates a random number between 100 and 500 milliseconds (0.1 to 0.5 seconds)
 			Thread.sleep((long) (Math.random() * 400 + 100));
