@@ -25,7 +25,7 @@ public class MainApp extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private final ArrayList<JLabel> labelPhilosopher = new ArrayList<JLabel>();
+	private static ArrayList<JLabel> labelPhilosopher = new ArrayList<JLabel>();
 	enum Status { STOPPED, STARTED };
 	private static Status status = Status.STOPPED;
 
@@ -112,7 +112,7 @@ public class MainApp extends JFrame {
 		JLabel lblPhilosopher0 = new JLabel("");
 		labelPhilosopher.add(lblPhilosopher0);
 		lblPhilosopher0.setBounds(202, 32, 40, 40);
-		lblPhilosopher0.setIcon(new ImageIcon(MainApp.class.getResource("/pacman.png")));
+		lblPhilosopher0.setIcon(new ImageIcon(MainApp.class.getResource("/purple-ghost.png")));
 		contentPane.add(lblPhilosopher0);
 		
 		JLabel lblPhilosopher1 = new JLabel("");
@@ -145,11 +145,31 @@ public class MainApp extends JFrame {
 		contentPane.add(background);
 	}
 	
-	public void PhilosopherThink(int index) {
+	public static void PhilosopherThink(int index) {
 		labelPhilosopher.get(index).setIcon(new ImageIcon(MainApp.class.getResource("/ghost.png")));
 	}
 	
-	public void PhilosopherEat(int index) {
-		labelPhilosopher.get(index).setIcon(new ImageIcon(MainApp.class.getResource("/pacman.txt")));
+	public static void PhilosopherEat(int index) {
+		labelPhilosopher.get(index).setIcon(new ImageIcon(MainApp.class.getResource("/pacman.png")));
+	}
+	
+	public static void PhilosopherIdle(int index) {
+		switch (index) {
+		case 0:
+			labelPhilosopher.get(0).setIcon(new ImageIcon(MainApp.class.getResource("/purple-ghost.png")));
+			break;
+		case 1:
+			labelPhilosopher.get(1).setIcon(new ImageIcon(MainApp.class.getResource("/red-ghost.png")));
+			break;
+		case 2:
+			labelPhilosopher.get(2).setIcon(new ImageIcon(MainApp.class.getResource("/cyan-ghost.png")));
+			break;
+		case 3:
+			labelPhilosopher.get(3).setIcon(new ImageIcon(MainApp.class.getResource("/orange-ghost.png")));
+			break;
+		case 4:
+			labelPhilosopher.get(4).setIcon(new ImageIcon(MainApp.class.getResource("/pink-ghost.png")));
+			break;
+		}
 	}
 }
