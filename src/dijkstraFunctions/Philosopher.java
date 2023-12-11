@@ -22,7 +22,7 @@ public class Philosopher extends Thread {
 		this.rightFork = rightFork;
 		this.timeData = new ArrayList<>(num);
 		
-        for (int i = 0; i < num; i++) {
+        for(int i = 0; i < num; i++) {
         	timeData.add(new ArrayList<>());
         }
 	}
@@ -50,7 +50,7 @@ public class Philosopher extends Thread {
 		System.out.println(idThread + " esta pensando.");
 		try {
 			//generates a random number between 100 and 500 milliseconds (0.1 to 0.5 seconds)
-			Thread.sleep((long) (Math.random() * 100 + 500));
+			Thread.sleep((long) (Math.random() * 400 + 100));
 			
 			//beginning of the time between thinking and eating
 			thinkingEatingTime = System.currentTimeMillis();
@@ -71,7 +71,7 @@ public class Philosopher extends Thread {
         	timeData.get(idThread - 1).add(subAux);
         	
         	//generates a random number between 100 and 500 milliseconds (0.1 to 0.5 seconds)
-            Thread.sleep((long) (Math.random() * 100 + 500));
+            Thread.sleep((long) (Math.random() * 400 + 100));
             
             //reset time counter without eating
             timeAux = System.currentTimeMillis();
