@@ -1,6 +1,6 @@
-package myFunctions;
+package carolineFunctions;
 
-public class MyExecution {
+public class CarolineExecution {
 
 	private static int numPhilosophers = 5;
 	private static Object[] forks = new Object[numPhilosophers];

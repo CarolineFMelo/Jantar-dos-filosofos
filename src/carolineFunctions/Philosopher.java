@@ -1,4 +1,4 @@
-package myFunctions;
+package carolineFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +39,35 @@ public class Philosopher extends Thread {
             int smallFork = Math.min(leftFork, rightFork);
             int bigFork = Math.max(leftFork, rightFork);
 			
-			synchronized(MyExecution.getForks()[smallFork]) {
-				synchronized(MyExecution.getForks()[bigFork]) {
+			synchronized(CarolineExecution.getForks()[smallFork]) {
+				synchronized(CarolineExecution.getForks()[bigFork]) {
 					eat();
 				}
 			}
 			timeWithoutEating = System.currentTimeMillis();
 		}
+		
+		// print average waiting time
+		//System.out.println("Tempo de espera do filosofo " + (idThread + 1));
+		long sum = 0;
+		for(List<Long> tD : timeData) {
+			for(Long time : tD) {
+				//System.out.print(time + "\n");
+				sum += time;
+			}
+		}
+		System.out.println("Tempo medio de espera do filosofo " + (idThread + 1) + ": " + (sum / contEat));
+
+		// print maximum waiting time
+		long max = Long.MIN_VALUE;
+		for(List<Long> tD : timeData) {
+			for(Long time : tD) {
+				if (time > max) {
+					max = time;
+				}
+			}
+		}
+		System.out.println("Tempo maximo de espera do filosofo " + (idThread + 1) + ": " + max);
 	}
 
 	private void think() {
