@@ -1,6 +1,6 @@
-package functions;
+package dijkstraFunctions;
 
-public class ProgramExecution {
+public class DijkstraExecution {
 	
 	public static void main(String args[]) {
 		int numPhilosophers = 5;
@@ -12,7 +12,7 @@ public class ProgramExecution {
 		}
 		
 		for(int i = 0; i < numPhilosophers; i++) {
-            philosophers[i] = new Philosopher(i + 1, forks[i], forks[(i + 1) % numPhilosophers]);
+            philosophers[i] = new Philosopher(numPhilosophers, i + 1, forks[i], forks[(i + 1) % numPhilosophers]);
         }
 		
 		for(Philosopher philosopher : philosophers) {
