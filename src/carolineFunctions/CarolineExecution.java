@@ -1,11 +1,11 @@
-package myFunctions;
+package carolineFunctions;
 
-public class MyExecution {
+public class CarolineExecution {
 
-	private static int numPhilosophers = 5;
-	private static Object[] forks = new Object[numPhilosophers];
+	static int numPhilosophers = 5;
+	static Object[] forks = new Object[numPhilosophers];
 	
-	public static void main(String[] args) {
+	public void carolineStart() {
 		Philosopher[] filosofos = new Philosopher[numPhilosophers];
 		
 		for(int i = 0; i < numPhilosophers; i++) {

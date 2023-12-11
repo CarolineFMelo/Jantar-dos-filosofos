@@ -29,7 +29,7 @@ public class Philosopher extends Thread {
 	public void run() {
 		while(true) {
 			//limits execution time in milliseconds for tests
-			if(System.currentTimeMillis() - start > 1000) {
+			if(System.currentTimeMillis() - start > 3000) {
                 break;
             }
 			
@@ -42,6 +42,28 @@ public class Philosopher extends Thread {
             rightFork.up();
             timeWithoutEating = System.currentTimeMillis();
         }
+		
+		//print average waiting time
+		//System.out.println("Tempo de espera do filosofo " + idThread);
+		long sum = 0;
+		for(List<Long> tD : timeData) {
+		    for(Long time : tD) {
+		        //System.out.print(time + "\n");
+		        sum += time;
+		    }
+		}
+		System.out.println("Tempo medio de espera do filosofo " + idThread + ": " + (sum/contEat));
+		
+		//print maximum waiting time
+		long max = Long.MIN_VALUE;
+		for(List<Long> tD : timeData) {
+		    for(Long time : tD) {
+		        if(time > max) {
+		            max = time;
+		        }
+		    }
+		}
+		System.out.println("Tempo maximo de espera do filosofo " + idThread + ": " + max);
 	}
 	
 	public void think() {
@@ -81,7 +103,5 @@ public class Philosopher extends Thread {
             e.printStackTrace();
         }
 	}
-
-	//get value: timeDate.get(linha).get(indice);
 	
 }
