@@ -1,23 +1,28 @@
 package carolineFunctions;
 
 public class CarolineExecution {
-
-	static int numPhilosophers = 5;
-	static Object[] forks = new Object[numPhilosophers];
 	
-	public void carolineStart() {
-		Philosopher[] filosofos = new Philosopher[numPhilosophers];
-		
+	private static int numPhilosophers = 5;
+	private static Object[] forks = new Object[numPhilosophers];
+	private static Philosopher[] philosophers = new Philosopher[numPhilosophers];
+	
+	public static void carolineStart() {		
 		for(int i = 0; i < numPhilosophers; i++) {
 			forks[i] = new Object();
 		}
-
-		for(int i = 0; i < numPhilosophers; i++) {
-			filosofos[i] = new Philosopher(numPhilosophers, i);
-		}
 		
 		for(int i = 0; i < numPhilosophers; i++) {
-			filosofos[i].start();
+			philosophers[i] = new Philosopher(numPhilosophers, i);
+		}
+		
+		for(Philosopher philosopher : philosophers) {
+			philosopher.start();
+		}
+	}
+	
+	public static void carolineStop() {
+		for(Philosopher philosopher : philosophers) {
+			philosopher.interrupt();
 		}
 	}
 
