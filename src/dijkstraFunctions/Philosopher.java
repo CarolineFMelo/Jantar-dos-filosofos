@@ -14,6 +14,7 @@ public class Philosopher extends Thread {
 	private long start = System.currentTimeMillis();
 	private long subAux = 0;
 	private long timeAux = System.currentTimeMillis();
+	private long timeout = 180000;
 	private List<List<Long>> timeData;
 	
 	public Philosopher(int num, int id, Semaphore leftFork, Semaphore rightFork) {
@@ -31,7 +32,8 @@ public class Philosopher extends Thread {
 	public void run() {
 		while(true) {
 			//limits execution time in milliseconds for tests
-			if(System.currentTimeMillis() - start > 3000) {
+			if(System.currentTimeMillis() - start > timeout) {
+				MainApp.StatusStop();
                 break;
             }
 			
@@ -54,6 +56,7 @@ public class Philosopher extends Thread {
 		        sum += time;
 		    }
 		}
+		MainApp.PhilosopherAverageWaitingTimeUpdate(idThread - 1, (sum/contEat));
 		System.out.println("Tempo medio de espera do filosofo " + idThread + ": " + (sum/contEat));
 		
 		//print maximum waiting time
@@ -65,6 +68,7 @@ public class Philosopher extends Thread {
 		        }
 		    }
 		}
+		MainApp.PhilosopherMaxWaitingTimeUpdate(idThread - 1, max);
 		System.out.println("Tempo maximo de espera do filosofo " + idThread + ": " + max);
 	}
 	
@@ -81,6 +85,7 @@ public class Philosopher extends Thread {
 			
 			//time without eating
 			timeWithoutEating = System.currentTimeMillis() - timeAux;
+			MainApp.PhilosopherTimeWithoutEatingUpdate(idThread - 1, timeWithoutEating);
             System.out.println(idThread + " nao come a " + timeWithoutEating + " milisegundos.");
 		} catch(InterruptedException e) {
 			e.printStackTrace();
@@ -104,10 +109,10 @@ public class Philosopher extends Thread {
             
             //counter of times eaten
             contEat++;
+            MainApp.PhilosopherEatenCountUpdate(idThread - 1, contEat);
             System.out.println(idThread + " comeu " + contEat + " vezes.");
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
-	}
-	
+	}	
 }
